@@ -7,10 +7,15 @@ namespace BuildStudio.Data.Model
 {
     public class Functionality
     {
+        #region bindable properties
+        public const string BindableProperties = "Name,Description,FunctionalSpecificationId";
+        public const string BindablePropertiesForEdition = "Id,Name,Description,FunctionalSpecificationId";
+        #endregion
+
         public int Id { get; set; }
 
         [Display(Name = "Identifier")]
-        public string ReadableId { get => $"Fn#{Id.ToString().PadLeft(3, '0')}"; }
+        public string ReadableId { get => $"Fn#{(Id.ToString()).PadLeft(3, '0')}"; }
 
         [Required]
         public string Name { get; set; }
@@ -22,8 +27,12 @@ namespace BuildStudio.Data.Model
 
         [Display(Name = "Functional Specification")]
         public int FunctionalSpecificationId { get; set; }
+
+        [Display(Name= "Functional Specification")]
         public virtual FunctionalSpecification FunctionalSpecification { get; set; }
 
-        public const string BindableProperties = "Id,Name,Description,FunctionalSpecificationId";
+        public ICollection<Requirement> Requirements { get; set; }
+
+        
     }
 }

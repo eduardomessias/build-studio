@@ -29,8 +29,14 @@
             @Html.DisplayFor(model => model.FunctionalSpecification.Title) (v @Html.DisplayFor(model => model.FunctionalSpecification.Version))
         </dd>
     </dl>
+    <hr />
+    @if(Model.Requirements.Any())
+    {
+        @await Html.PartialAsync("PartialRequirements", Model)
+    }
 </div>
 <div>
+    <a asp-controller="Requirements" asp-action="Create" asp-route-id="@Model.Id">Add requirement</a> |
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
     <a asp-controller="FunctionalSpecifications" asp-action="Details" asp-route-id="@Model.FunctionalSpecificationId">Back to List</a>
 </div>

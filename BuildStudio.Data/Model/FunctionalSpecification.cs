@@ -6,6 +6,10 @@ namespace BuildStudio.Data.Model
 {
     public class FunctionalSpecification
     {
+        #region bindable properties
+        public const string BindableProperties = "Id,Title,Author,Creation,Status,Version";
+        #endregion
+
         public int Id { get; set; }
 
         public string Title { get; set; }
@@ -19,10 +23,6 @@ namespace BuildStudio.Data.Model
         public FunctionalSpecStatus Status { get; set; }
 
         public virtual ICollection<Functionality> Functionalities { get; set; }
-
-        #region bindable properties
-        public const string BindableProperties = "Id,Title,Author,Creation,Status,Version";
-        #endregion
     }
 
     public static class FunctionalSpecificationExtensions

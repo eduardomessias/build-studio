@@ -13,6 +13,7 @@ namespace BuildStudio.Data
     {
         public DbSet<FunctionalSpecification> FunctionalSpecifications { get; set; }
         public DbSet<Functionality> Functionalities { get; set; }
+        public DbSet<Requirement> Requirements { get; set; }  
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)

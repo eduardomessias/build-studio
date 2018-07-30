@@ -1,0 +1,46 @@
+﻿@model BuildStudio.Data.Model.Functionality
+
+<table class="table dataTable table-bordered">
+    <thead>
+        <tr>
+            <th colspan="4" class="bg-primary">
+                @Html.DisplayNameFor(model => model.Requirements)
+            </th>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Requirements.FirstOrDefault().ReadableId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Requirements.FirstOrDefault().Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Requirements.FirstOrDefault().ShortDescription)
+            </th>
+            <th>
+                User actions
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Requirements)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => item.ReadableId)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.ShortDescription)
+                </td>
+                <td>
+                    <a asp-controller="Requirements" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-controller="Requirements" asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-controller="Requirements" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -61,6 +61,7 @@ namespace BuildStudio.Controllers
             var functionality = await _context
                                     .Functionalities
                                     .Include(fn => fn.FunctionalSpecification)
+                                    .Include(fn => fn.Requirements)
                                     .SingleOrDefaultAsync(m => m.Id == id);
 
             if (functionality == null)
@@ -94,7 +95,7 @@ namespace BuildStudio.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind(Functionality.BindableProperties)] Functionality functionality)
+        public async Task<IActionResult> Edit(int id, [Bind(Functionality.BindablePropertiesForEdition)] Functionality functionality)
         {
             if (id != functionality.Id)
             {
@@ -122,6 +123,41 @@ namespace BuildStudio.Controllers
                 return RedirectToAction("Details", "FunctionalSpecifications", new { Id = functionality.FunctionalSpecificationId });
             }
             return View(functionality);
+        }
+
+        // GET: Functionalities/Delete/5
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var functionality = await _context
+                                    .Functionalities
+                                    .SingleOrDefaultAsync(m => m.Id == id);
+
+            if (functionality == null)
+            {
+                return NotFound();
+            }
+
+            return View(functionality);
+        }
+
+        // POST: Functionalities/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var functionality = await _context
+                                    .Functionalities
+                                    .SingleOrDefaultAsync(m => m.Id == id);
+
+            _context.Functionalities.Remove(functionality);
+
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Details", "FunctionalSpecifications", new { Id = functionality.FunctionalSpecificationId });
         }
     }
 }
