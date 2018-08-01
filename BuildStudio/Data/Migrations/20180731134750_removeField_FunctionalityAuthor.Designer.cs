@@ -12,9 +12,10 @@ using System;
 namespace BuildStudio.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180731134750_removeField_FunctionalityAuthor")]
+    partial class removeField_FunctionalityAuthor
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -92,8 +93,6 @@ namespace BuildStudio.Data.Migrations
                         .HasMaxLength(256);
 
                     b.Property<bool>("EmailConfirmed");
-
-                    b.Property<string>("FullName");
 
                     b.Property<bool>("LockoutEnabled");
 

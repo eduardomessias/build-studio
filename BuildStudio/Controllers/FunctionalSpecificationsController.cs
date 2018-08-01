@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using BuildStudio.Data;
 using BuildStudio.Data.Model;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using BuildStudio.Models;
 
 namespace BuildStudio.Controllers
 {
@@ -15,17 +17,23 @@ namespace BuildStudio.Controllers
     public class FunctionalSpecificationsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
         
 
-        public FunctionalSpecificationsController(ApplicationDbContext context)
+        public FunctionalSpecificationsController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: FunctionalSpecifications
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string author)
         {
-            return View(await _context.FunctionalSpecifications.ToListAsync());
+            var functionalSpecifications = String.IsNullOrEmpty(author) ?
+                                                await _context.FunctionalSpecifications.ToListAsync() :
+                                                await _context.FunctionalSpecifications.Where(fs => fs.Author == author).ToListAsync();
+
+            return View(functionalSpecifications);
         }
 
         // GET: FunctionalSpecifications/Details/5
@@ -50,9 +58,16 @@ namespace BuildStudio.Controllers
         }
 
         // GET: FunctionalSpecifications/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            return View(new FunctionalSpecification());
+            var user = await _userManager.GetUserAsync(User);
+
+            var functionalSpecification = new FunctionalSpecification
+            {
+                Author = user?.FullName
+            };
+
+            return View(functionalSpecification);
         }
 
         // POST: FunctionalSpecifications/Create
@@ -65,6 +80,7 @@ namespace BuildStudio.Controllers
             if (ModelState.IsValid)
             {
                 _context.Add(functionalSpecification);
+
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }

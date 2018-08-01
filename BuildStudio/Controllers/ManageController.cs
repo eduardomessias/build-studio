@@ -58,6 +58,7 @@ namespace BuildStudio.Controllers
             var model = new IndexViewModel
             {
                 Username = user.UserName,
+                FullName = user.FullName,
                 Email = user.Email,
                 PhoneNumber = user.PhoneNumber,
                 IsEmailConfirmed = user.EmailConfirmed,
@@ -99,6 +100,17 @@ namespace BuildStudio.Controllers
                 if (!setPhoneResult.Succeeded)
                 {
                     throw new ApplicationException($"Unexpected error occurred setting phone number for user with ID '{user.Id}'.");
+                }
+            }
+
+            var fullName = user.FullName;
+            if (model.FullName != fullName)
+            {
+                user.FullName = model.FullName;
+                var setFullNameResult = await _userManager.UpdateAsync(user);
+                if (!setFullNameResult.Succeeded)
+                {
+                    throw new ApplicationException($"Unexpected error occurred setting full name for user with ID '{user.Id}'.");
                 }
             }
 
