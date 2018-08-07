@@ -1,0 +1,52 @@
+﻿@model BuildStudio.Data.Model.ExpectedResult
+
+<table class="table dataTable table-bordered">
+    <thead>
+        <tr>
+            <th colspan="5" class="bg-primary">
+                @Html.DisplayNameFor(model => model.Results)
+            </th>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Results.FirstOrDefault().ReadableId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Results.FirstOrDefault().Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Results.FirstOrDefault().ShortDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Results.FirstOrDefault().Expected)
+            </th>
+            <th>
+                User actions
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Results)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => item.ReadableId)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.ShortDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.Expected)
+                </td>
+                <td>
+                    <a asp-controller="Results" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-controller="Results" asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-controller="Results" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

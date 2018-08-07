@@ -1,4 +1,4 @@
-﻿@model BuildStudio.Data.Model.Requirement
+﻿@model BuildStudio.Data.Model.AcceptanceCriteria
 
 @{
     ViewData["Title"] = "Details";
@@ -7,7 +7,7 @@
 <h2>Details</h2>
 
 <div>
-    <h4>Requirement</h4>
+    <h4>Acceptance criteria</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -23,20 +23,20 @@
             @Html.DisplayFor(model => model.Description)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Functionality)
+            @Html.DisplayNameFor(model => model.Requirement)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Functionality.Name)
+            @Html.DisplayFor(model => model.Requirement.Name)
         </dd>
     </dl>
     <hr />
-    @if(Model.AcceptanceCriterias.Any())
+    @if (Model.Conditions.Any())
     {
-        @await Html.PartialAsync("PartialAcceptanceCriterias", Model)
+        @await Html.PartialAsync("PartialConditions", Model)
     }
 </div>
 <div>
-    <a asp-controller="AcceptanceCriterias" asp-action="Create" asp-route-id="@Model.Id">Add acceptance criteria</a> |
+    <a asp-controller="Conditions" asp-action="Create" asp-route-id="@Model.Id">Add condition</a> |
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Details" asp-controller="Functionalities" asp-route-id="@Model.FunctionalityId">Back to the functionality</a>
+    <a asp-controller="Requirements" asp-action="Details" asp-route-id="@Model.RequirementId">Back to the requirement</a>
 </div>

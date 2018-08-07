@@ -1,0 +1,46 @@
+﻿@model BuildStudio.Data.Model.Condition
+
+<table class="table dataTable table-bordered">
+    <thead>
+        <tr>
+            <th colspan="4" class="bg-primary">
+                @Html.DisplayNameFor(model => model.ExpectedResults)
+            </th>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ExpectedResults.FirstOrDefault().ReadableId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ExpectedResults.FirstOrDefault().Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ExpectedResults.FirstOrDefault().ShortDescription)
+            </th>
+            <th>
+                User actions
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.ExpectedResults)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => item.ReadableId)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.ShortDescription)
+                </td>
+                <td>
+                    <a asp-controller="ExpectedResults" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-controller="ExpectedResults" asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-controller="ExpectedResults" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

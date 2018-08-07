@@ -62,7 +62,7 @@ namespace BuildStudio.Controllers
                                     .Functionalities
                                     .Include(fn => fn.FunctionalSpecification)
                                     .Include(fn => fn.Requirements)
-                                    .SingleOrDefaultAsync(m => m.Id == id);
+                                    .SingleOrDefaultAsync(fn => fn.Id == id);
 
             if (functionality == null)
             {
@@ -80,7 +80,7 @@ namespace BuildStudio.Controllers
                 return NotFound();
             }
 
-            var functionality = await _context.Functionalities.SingleOrDefaultAsync(m => m.Id == id);
+            var functionality = await _context.Functionalities.SingleOrDefaultAsync(fn => fn.Id == id);
             if (functionality == null)
             {
                 return NotFound();
@@ -111,7 +111,7 @@ namespace BuildStudio.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!_context.Functionalities.Any(x => x.Id == functionality.Id))
+                    if (!_context.Functionalities.Any(fn => fn.Id == functionality.Id))
                     {
                         return NotFound();
                     }
@@ -135,7 +135,7 @@ namespace BuildStudio.Controllers
 
             var functionality = await _context
                                     .Functionalities
-                                    .SingleOrDefaultAsync(m => m.Id == id);
+                                    .SingleOrDefaultAsync(fn => fn.Id == id);
 
             if (functionality == null)
             {
@@ -152,7 +152,7 @@ namespace BuildStudio.Controllers
         {
             var functionality = await _context
                                     .Functionalities
-                                    .SingleOrDefaultAsync(m => m.Id == id);
+                                    .SingleOrDefaultAsync(fn => fn.Id == id);
 
             _context.Functionalities.Remove(functionality);
 

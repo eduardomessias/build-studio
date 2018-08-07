@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace BuildStudio.Data.Model
 {
@@ -28,5 +26,8 @@ namespace BuildStudio.Data.Model
         public int FunctionalityId { get; set; }
 
         public Functionality Functionality { get; set; }
+
+        [Display(Name = "Acceptance criterias")]
+        public ICollection<AcceptanceCriteria> AcceptanceCriterias { get; set; }
     }
 }

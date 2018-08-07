@@ -1,4 +1,4 @@
-﻿@model BuildStudio.Data.Model.Functionality
+﻿@model BuildStudio.Data.Model.Result
 
 @{
     ViewData["Title"] = "Create";
@@ -6,7 +6,7 @@
 
 <h2>Create</h2>
 
-<h4>Functionality</h4>
+<h4>Result</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -23,8 +23,16 @@
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="FunctionalSpecificationId" class="control-label"></label>
-                <select asp-for="FunctionalSpecificationId" class="form-control" asp-items="ViewBag.FunctionalSpecificationId"></select>
+                <div class="checkbox">
+                    <label asp-for="Expected">
+                        <input asp-for="Expected" />
+                        @Html.DisplayNameFor(m => m.Expected)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="ExpectedResultId" class="control-label"></label>
+                <select asp-for="ExpectedResultId" class="form-control" asp-items="ViewBag.ExpectedResultId"></select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />
@@ -34,9 +42,6 @@
 </div>
 
 <div>
-    <a asp-controller="FunctionalSpecifications" asp-action="Details" asp-route-id="@ViewContext.RouteData.Values["id"]">Back to the functional specification</a>
+    <a asp-controller="ExpectedResults" asp-action="Details" asp-route-id="@ViewContext.RouteData.Values["id"]">Back to the expected result</a>
 </div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}

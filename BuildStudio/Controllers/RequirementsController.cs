@@ -29,8 +29,9 @@ namespace BuildStudio.Controllers
 
             var requirement = await _context
                                     .Requirements
-                                    .Include(r => r.Functionality)
-                                    .SingleOrDefaultAsync(m => m.Id == id);
+                                    .Include(rq => rq.Functionality)
+                                    .Include(rq => rq.AcceptanceCriterias)
+                                    .SingleOrDefaultAsync(rq => rq.Id == id);
 
             if (requirement == null)
             {
@@ -81,7 +82,7 @@ namespace BuildStudio.Controllers
                 return NotFound();
             }
 
-            var requirement = await _context.Requirements.SingleOrDefaultAsync(m => m.Id == id);
+            var requirement = await _context.Requirements.SingleOrDefaultAsync(rq => rq.Id == id);
 
             if (requirement == null)
             {
@@ -140,8 +141,8 @@ namespace BuildStudio.Controllers
 
             var requirement = await _context
                                     .Requirements
-                                    .Include(r => r.Functionality)
-                                    .SingleOrDefaultAsync(m => m.Id == id);
+                                    .Include(rq => rq.Functionality)
+                                    .SingleOrDefaultAsync(rq => rq.Id == id);
 
             if (requirement == null)
             {
@@ -158,7 +159,7 @@ namespace BuildStudio.Controllers
         {
             var requirement = await _context
                                     .Requirements
-                                    .SingleOrDefaultAsync(m => m.Id == id);
+                                    .SingleOrDefaultAsync(rq => rq.Id == id);
 
             _context.Requirements.Remove(requirement);
 

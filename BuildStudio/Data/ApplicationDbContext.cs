@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using BuildStudio.Models;
 using BuildStudio.Data.Model;
@@ -13,7 +9,11 @@ namespace BuildStudio.Data
     {
         public DbSet<FunctionalSpecification> FunctionalSpecifications { get; set; }
         public DbSet<Functionality> Functionalities { get; set; }
-        public DbSet<Requirement> Requirements { get; set; }  
+        public DbSet<Requirement> Requirements { get; set; }
+        public DbSet<AcceptanceCriteria> AcceptanceCriterias { get; set; }
+        public DbSet<Condition> Conditions { get; set; }
+        public DbSet<ExpectedResult> ExpectedResults { get; set; }
+        public DbSet<Result> Results { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)

@@ -46,8 +46,8 @@ namespace BuildStudio.Controllers
 
             var functionalSpecification = await _context
                                                 .FunctionalSpecifications
-                                                .Include(spec => spec.Functionalities)
-                                                .SingleOrDefaultAsync(m => m.Id == id);
+                                                .Include(fs => fs.Functionalities)
+                                                .SingleOrDefaultAsync(fs => fs.Id == id);
 
             if (functionalSpecification == null)
             {
@@ -95,7 +95,7 @@ namespace BuildStudio.Controllers
                 return NotFound();
             }
 
-            var functionalSpecification = await _context.FunctionalSpecifications.SingleOrDefaultAsync(m => m.Id == id);
+            var functionalSpecification = await _context.FunctionalSpecifications.SingleOrDefaultAsync(fs => fs.Id == id);
             if (functionalSpecification == null)
             {
                 return NotFound();
@@ -148,7 +148,7 @@ namespace BuildStudio.Controllers
             }
 
             var functionalSpecification = await _context.FunctionalSpecifications
-                .SingleOrDefaultAsync(m => m.Id == id);
+                .SingleOrDefaultAsync(fs => fs.Id == id);
             if (functionalSpecification == null)
             {
                 return NotFound();
@@ -162,7 +162,7 @@ namespace BuildStudio.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var functionalSpecification = await _context.FunctionalSpecifications.SingleOrDefaultAsync(m => m.Id == id);
+            var functionalSpecification = await _context.FunctionalSpecifications.SingleOrDefaultAsync(fs => fs.Id == id);
             _context.FunctionalSpecifications.Remove(functionalSpecification);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
@@ -170,7 +170,7 @@ namespace BuildStudio.Controllers
 
         private bool FunctionalSpecificationExists(int id)
         {
-            return _context.FunctionalSpecifications.Any(e => e.Id == id);
+            return _context.FunctionalSpecifications.Any(fs => fs.Id == id);
         }
     }
 }
