@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewData["Title"] = "Build studio dashboard";
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <h1><a style="text-decoration:none" asp-controller="Home" asp-action="Index">Build Studio</a></h1>
+        <h4>Intelligent software design.</h4>
+        
+    </div>
+</div>
+<div class="row">
+    <div class="container">
+        <hr />
+        <h4 class="pull-right">Dashboard</h4>
+        
+        <div class="row">
+            <div class="col-md-3">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h2 class="panel-title"><i class="glyphicon glyphicon-option-vertical"></i>Foot steps</h2>
+                    </div>
+                    <div class="panel-body">
+                        <ul class="timeline">
+                            <li>
+                                <a href="#" class="float-right">21 March, 2014</a>
+                                <p><strong>Home resource planning</strong><br />Fn#001: Create family</p>
+                            </li>
+                            <li>
+                                <a href="#" class="float-right">21 March, 2014</a>
+                                <p><strong>Home resource planning</strong><br />Fn#001: Create family</p>
+                            </li>
+                            <li>
+                                <a href="#" class="float-right">21 March, 2014</a>
+                                <p><strong>Home resource planning</strong><br />Fn#001: Create family</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <form asp-area="" asp-controller="Account" asp-action="Logout" method="post">
+                    <button type="submit" class="btn btn-danger">Sign out</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+

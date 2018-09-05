@@ -7,175 +7,66 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BuildStudio.Data;
 using BuildStudio.Data.Model;
+using Microsoft.AspNetCore.Identity;
+using BuildStudio.Models;
 
 namespace BuildStudio.Controllers
 {
-    public class AcceptanceCriteriasController : Controller
+    using Base;
+    using Data.Repository;
+
+    public class AcceptanceCriteriasController : BuildStudioDefaultController<ApplicationDbContext, AcceptanceCriteria>
     {
-        private readonly ApplicationDbContext _context;
+        private readonly new AcRepository repository;
 
-        public AcceptanceCriteriasController(ApplicationDbContext context)
+        public AcceptanceCriteriasController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+            : base(context)
         {
-            _context = context;
+            repository = new AcRepository(context);
         }
 
-        // GET: AcceptanceCriterias/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public override async Task<IActionResult> Create(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var acceptanceCriteria = await _context
-                                            .AcceptanceCriterias
-                                            .Include(ac => ac.Requirement)
-                                            .Include(ac => ac.Conditions)
-                                            .SingleOrDefaultAsync(ac => ac.Id == id);
-
-            if (acceptanceCriteria == null)
-            {
-                return NotFound();
-            }
-
-            return View(acceptanceCriteria);
+            var view = await base.Create(id);
+            
+            return view.WithParentViewData(await repository.ReadParentSetAsync<Requirement>(), parentId: id);
         }
 
-        // GET: AcceptanceCriterias/Create
-        public IActionResult Create(int? id)
-        {
-            var acceptanceCriteria = new AcceptanceCriteria
-            {
-                RequirementId = id.GetValueOrDefault()
-            };
-
-            ViewData["RequirementId"] = new SelectList(_context.Requirements, "Id", "Name", acceptanceCriteria.RequirementId);
-
-            return View();
-        }
-
-        // POST: AcceptanceCriterias/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind(AcceptanceCriteria.BindableProperties)] AcceptanceCriteria acceptanceCriteria)
+        public override async Task<IActionResult> Create([Bind(AcceptanceCriteria.BindableProperties)] AcceptanceCriteria acceptanceCriteria)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(acceptanceCriteria);
+            var view = await base.Create(acceptanceCriteria);
 
-                await _context.SaveChangesAsync();
-
-                return RedirectToAction("Details", "Requirements", new { Id = acceptanceCriteria.RequirementId });
-            }
-
-            ViewData["RequirementId"] = new SelectList(_context.Requirements, "Id", "Name", acceptanceCriteria.RequirementId);
-
-            return View(acceptanceCriteria);
+            return view.WithParentViewData(await repository.ReadParentSetAsync<Requirement>(), parentId: acceptanceCriteria.RequirementId);
         }
 
-        // GET: AcceptanceCriterias/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public override async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
+            if (!id.HasValue)
             {
                 return NotFound();
             }
 
-            var acceptanceCriteria = await _context
-                                            .AcceptanceCriterias
-                                            .SingleOrDefaultAsync(ac => ac.Id == id);
+            var acceptanceCriteria = await repository.ReadAsync(id.Value);
 
             if (acceptanceCriteria == null)
             {
                 return NotFound();
             }
 
-            ViewData["RequirementId"] = new SelectList(_context.Requirements, "Id", "Name", acceptanceCriteria.RequirementId);
+            var view = View(acceptanceCriteria);
 
-            return View(acceptanceCriteria);
+            return view.WithParentViewData(await repository.ReadParentSetAsync<Requirement>(), parentId: acceptanceCriteria.RequirementId);
         }
 
-        // POST: AcceptanceCriterias/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind(AcceptanceCriteria.BindablePropertiesForEdition)] AcceptanceCriteria acceptanceCriteria)
+        public override async Task<IActionResult> Edit(int id, [Bind(AcceptanceCriteria.BindablePropertiesForEdition)] AcceptanceCriteria acceptanceCriteria)
         {
-            if (id != acceptanceCriteria.Id)
-            {
-                return NotFound();
-            }
+            var view = await base.Edit(id, acceptanceCriteria);
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(acceptanceCriteria);
-
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!AcceptanceCriteriaExists(acceptanceCriteria.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-
-                return RedirectToAction("Details", "Requirements", new { Id = acceptanceCriteria.RequirementId });
-            }
-
-            ViewData["RequirementId"] = new SelectList(_context.Requirements, "Id", "Name", acceptanceCriteria.RequirementId);
-
-            return View(acceptanceCriteria);
-        }
-
-        // GET: AcceptanceCriterias/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var acceptanceCriteria = await _context
-                                            .AcceptanceCriterias
-                                            .SingleOrDefaultAsync(ac => ac.Id == id);
-
-            if (acceptanceCriteria == null)
-            {
-                return NotFound();
-            }
-
-            return View(acceptanceCriteria);
-        }
-
-        // POST: AcceptanceCriterias/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var acceptanceCriteria = await _context
-                                            .AcceptanceCriterias
-                                            .SingleOrDefaultAsync(ac => ac.Id == id);
-
-            _context.AcceptanceCriterias.Remove(acceptanceCriteria);
-
-            await _context.SaveChangesAsync();
-
-            return RedirectToAction("Details", "Requirements", new { Id = acceptanceCriteria.RequirementId });
-        }
-
-        private bool AcceptanceCriteriaExists(int id)
-        {
-            return _context.AcceptanceCriterias.Any(ac => ac.Id == id);
+            return view.WithParentViewData(await repository.ReadParentSetAsync<Requirement>(), parentId: acceptanceCriteria.RequirementId);
         }
     }
 }

@@ -26,11 +26,21 @@ namespace BuildStudio.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<bool>("Active");
+
+                    b.Property<string>("CreatedBy");
+
+                    b.Property<DateTime>("Creation");
+
                     b.Property<string>("Description");
+
+                    b.Property<string>("ModifiedBy");
 
                     b.Property<string>("Name");
 
                     b.Property<int>("RequirementId");
+
+                    b.Property<DateTime>("Update");
 
                     b.HasKey("Id");
 
@@ -46,9 +56,19 @@ namespace BuildStudio.Data.Migrations
 
                     b.Property<int>("AcceptanceCriteriaId");
 
+                    b.Property<bool>("Active");
+
+                    b.Property<string>("CreatedBy");
+
+                    b.Property<DateTime>("Creation");
+
                     b.Property<string>("Description");
 
+                    b.Property<string>("ModifiedBy");
+
                     b.Property<string>("Name");
+
+                    b.Property<DateTime>("Update");
 
                     b.HasKey("Id");
 
@@ -62,11 +82,21 @@ namespace BuildStudio.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<bool>("Active");
+
                     b.Property<int>("ConditionId");
+
+                    b.Property<string>("CreatedBy");
+
+                    b.Property<DateTime>("Creation");
 
                     b.Property<string>("Description");
 
+                    b.Property<string>("ModifiedBy");
+
                     b.Property<string>("Name");
+
+                    b.Property<DateTime>("Update");
 
                     b.HasKey("Id");
 
@@ -80,12 +110,22 @@ namespace BuildStudio.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<bool>("Active");
+
+                    b.Property<string>("CreatedBy");
+
+                    b.Property<DateTime>("Creation");
+
                     b.Property<string>("Description");
 
                     b.Property<int>("FunctionalSpecificationId");
 
+                    b.Property<string>("ModifiedBy");
+
                     b.Property<string>("Name")
                         .IsRequired();
+
+                    b.Property<DateTime>("Update");
 
                     b.HasKey("Id");
 
@@ -99,13 +139,21 @@ namespace BuildStudio.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<bool>("Active");
+
                     b.Property<string>("Author");
 
+                    b.Property<string>("CreatedBy");
+
                     b.Property<DateTime>("Creation");
+
+                    b.Property<string>("ModifiedBy");
 
                     b.Property<int>("Status");
 
                     b.Property<string>("Title");
+
+                    b.Property<DateTime>("Update");
 
                     b.Property<string>("Version");
 
@@ -119,11 +167,21 @@ namespace BuildStudio.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<bool>("Active");
+
+                    b.Property<string>("CreatedBy");
+
+                    b.Property<DateTime>("Creation");
+
                     b.Property<string>("Description");
 
                     b.Property<int>("FunctionalityId");
 
+                    b.Property<string>("ModifiedBy");
+
                     b.Property<string>("Name");
+
+                    b.Property<DateTime>("Update");
 
                     b.HasKey("Id");
 
@@ -137,13 +195,23 @@ namespace BuildStudio.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<bool>("Active");
+
+                    b.Property<string>("CreatedBy");
+
+                    b.Property<DateTime>("Creation");
+
                     b.Property<string>("Description");
 
                     b.Property<bool>("Expected");
 
                     b.Property<int>("ExpectedResultId");
 
+                    b.Property<string>("ModifiedBy");
+
                     b.Property<string>("Name");
+
+                    b.Property<DateTime>("Update");
 
                     b.HasKey("Id");
 

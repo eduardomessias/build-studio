@@ -2,14 +2,14 @@
 
 namespace BuildStudio.Data.Model
 {
-    public class Result
+    using Core.Data.Base.Model;
+
+    public class Result : BindableEntity
     {
         #region bindable properties
-        public const string BindableProperties = "Name,Description,Expected,ExpectedResultId";
-        public const string BindablePropertiesForEdition = "Id,Name,Description,Expected,ExpectedResultId";
+        public new const string BindableProperties = "Name,Description,Expected,ExpectedResultId,Creator";
+        public new const string BindablePropertiesForEdition = "Id,Name,Description,Expected,ExpectedResultId";
         #endregion
-
-        public int Id { get; set; }
 
         [Display(Name = "Identifier")]
         public string ReadableId { get => $"Rs#{(Id.ToString()).PadLeft(3, '0')}"; }

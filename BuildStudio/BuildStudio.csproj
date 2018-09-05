@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BuildStudio.Data\BuildStudio.Data.csproj" />
+    <ProjectReference Include="..\BuildStudio.Intelligence\BuildStudio.Intelligence.csproj" />
   </ItemGroup>
 
 </Project>

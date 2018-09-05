@@ -4,21 +4,22 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BuildStudio.Data.Model
 {
-    public class FunctionalSpecification
+    using BuildStudio.Core.Data.Base.Attributes;
+    using Core.Data.Base;
+    using Core.Data.Base.Model;
+
+    public class FunctionalSpecification : BindableEntity
     {
         #region bindable properties
-        public const string BindableProperties = "Id,Title,Author,Creation,Status,Version";
+        public new const string BindableProperties = "Id,Title,Author,Creation,Status,Version,Creator";
+        public new const string BindablePropertiesForEdition = "Id,Title,Author,Creation,Status,Version";
         #endregion
-
-        public int Id { get; set; }
 
         public string Title { get; set; }
         public string Author { get; set; }
 
         [Display(Name = "Version")]
         public string Version { get; set; } = new Version("1.0.0.0").ToString();
-
-        public DateTime Creation { get; set; } = DateTime.Now;
 
         public FunctionalSpecStatus Status { get; set; }
 
@@ -27,7 +28,12 @@ namespace BuildStudio.Data.Model
 
     public static class FunctionalSpecificationExtensions
     {
-        public static string Incremented(this string currentVersionString)
+        public static void IncreaseVersion(this FunctionalSpecification functionalSpecification)
+        {
+            functionalSpecification.Version = functionalSpecification.Version.Incremented();
+        }
+
+        private static string Incremented(this string currentVersionString)
         {
             Version currentVersion = new Version(currentVersionString);
             Version newVersion;

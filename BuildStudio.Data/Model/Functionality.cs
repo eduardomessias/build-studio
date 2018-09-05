@@ -3,14 +3,15 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BuildStudio.Data.Model
 {
-    public class Functionality
+    using Core.Data.Base.Attributes;
+    using Core.Data.Base.Model;
+
+    public class Functionality : BindableEntity
     {
         #region bindable properties
-        public const string BindableProperties = "Name,Description,FunctionalSpecificationId";
-        public const string BindablePropertiesForEdition = "Id,Name,Description,FunctionalSpecificationId";
+        public new const string BindableProperties = "Name,Description,FunctionalSpecificationId,Creator";
+        public new const string BindablePropertiesForEdition = "Id,Name,Description,FunctionalSpecificationId";
         #endregion
-
-        public int Id { get; set; }
 
         [Display(Name = "Identifier")]
         public string ReadableId { get => $"Fn#{(Id.ToString()).PadLeft(3, '0')}"; }
@@ -26,6 +27,7 @@ namespace BuildStudio.Data.Model
         [Display(Name = "Functional Specification")]
         public int FunctionalSpecificationId { get; set; }
 
+        [Parent]
         [Display(Name= "Functional Specification")]
         public virtual FunctionalSpecification FunctionalSpecification { get; set; }
 

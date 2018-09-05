@@ -3,14 +3,14 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BuildStudio.Data.Model
 {
-    public class Requirement
+    using Core.Data.Base.Model;
+
+    public class Requirement : BindableEntity
     {
         #region bindable properties
-        public const string BindableProperties = "Name,Description,FunctionalityId";
-        public const string BindablePropertiesForEdition = "Id,Name,Description,FunctionalityId";
+        public new const string BindableProperties = "Name,Description,FunctionalityId,Creator";
+        public new const string BindablePropertiesForEdition = "Id,Name,Description,FunctionalityId";
         #endregion
-
-        public int Id { get; set; }
 
         [Display(Name = "Identifier")]
         public string ReadableId { get => $"Rq#{(Id.ToString()).PadLeft(3, '0')}"; }

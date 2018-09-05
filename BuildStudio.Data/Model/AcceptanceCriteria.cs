@@ -3,14 +3,14 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BuildStudio.Data.Model
 {
-    public class AcceptanceCriteria
+    using Core.Data.Base.Model;
+
+    public class AcceptanceCriteria : BindableEntity
     {
         #region bindable properties
-        public const string BindableProperties = "Name,Description,RequirementId";
-        public const string BindablePropertiesForEdition = "Id,Name,Description,RequirementId";
+        public new const string BindableProperties = "Name,Description,RequirementId,Creator";
+        public new const string BindablePropertiesForEdition = "Id,Name,Description,RequirementId";
         #endregion
-
-        public int Id { get; set; }
 
         [Display(Name = "Identifier")]
         public string ReadableId { get => $"Ac#{(Id.ToString()).PadLeft(3, '0')}"; }
