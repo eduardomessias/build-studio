@@ -5,4 +5,4 @@ Down below you can see them in a big picture that include their relation cardina
 
 ![Conceptual entities comprehended by an application](https://github.com/eduardomessias/build-studio/blob/master/Build%20Studio%20-%20conceptual%20entities%20comprehended%20by%20an%20application.png)
 
-![Core package - class diagram (v0.0.0.1)](https://github.com/eduardomessias/build-studio/blob/master/Build%20Studio%20-%20core%20package%20class%20diagram%20v0.0.0.1.png)
+![Core package - class diagram (v0.0.0.1)](https://github.com/eduardomessias/build-studio/raw/master/Build%20Studio%20-%20Core%20package%20class%20diagram%20v0.0.0.1.png)
