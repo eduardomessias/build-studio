@@ -1,4 +1,4 @@
-# Build Studio
+# Getting started
 Build Studio is an application to help you build applications.<Enter>
 According with Build Studio's core engine, there are conceptual entities comprehended by most applications.<Enter>
 Down below you can see them in a big picture that include their relation cardinality as well.
