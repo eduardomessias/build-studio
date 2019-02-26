@@ -1,3 +1,17 @@
-
+# Current jekyll theme
 theme: jekyll-theme-architect
-title: "Build Studio"
+
+# Website name
+name: Eduardo Messias
+
+# Website title
+title: Eduardo Messias
+
+# Root website directory
+baseurl: ""
+
+# Website root url
+url: https://eduardomessias.github.io
+
+# Jekyll markdown capabilities extension
+markdown: kramdown
